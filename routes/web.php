@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontPage\FrontPageController;
+use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Management\ManagementController;
 
 Route::get('/', [FrontPageController::class, 'index'])->name('frontpage.index');
@@ -13,5 +14,8 @@ Route::get('/post/categories/{categories:slug}', [FrontPageController::class, 'p
 Route::prefix('management')
 		->as('management.')
 		->group(function() {
+            Route::get('/register', [AdminAuthController::class, 'register'])->name('register');
+            Route::post('/register', [AdminAuthController::class, 'createUser'])->name('createuser');
+            Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
             Route::get('/', [ManagementController::class, 'index'])->name('index');
         });

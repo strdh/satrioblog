@@ -20,25 +20,25 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
+        'image'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    public static $rules = [
+        'name' => 'required|min:3',
+        'email' => 'required|unique:users',
+        'username' => 'required|min:8|unique:users',
+        'password' => 'required|min:8' 
+    ];
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+  
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
 }
