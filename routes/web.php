@@ -17,5 +17,12 @@ Route::prefix('management')
             Route::get('/register', [AdminAuthController::class, 'register'])->name('register');
             Route::post('/register', [AdminAuthController::class, 'createUser'])->name('createuser');
             Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
-            Route::get('/', [ManagementController::class, 'index'])->name('index');
+            Route::post('/login', [AdminAuthController::class, 'validateUser'])->name('validateuser');
+            Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+            // Route::middleware('authAdmin')->group(function(){
+            //     Route::get('/', [ManagementController::class, 'index'])->name('index');
+            // });
+            Route::group(['middleware' => ['auth:admin']], function(){
+                Route::get('/', [ManagementController::class, 'index'])->name('index');
+            });
         });
