@@ -7415,7 +7415,7 @@ textarea.form-control-lg {
 }
 
 .bg-success {
-  background-color: #198754 !important;
+  background-color: #eeeeff !important;
 }
 
 .bg-info {
@@ -11301,3 +11301,4 @@ body {
 .f-right {
     float: right;
 }
+

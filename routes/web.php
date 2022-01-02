@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontPage\FrontPageController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Management\ManagementController;
+use App\Http\Controllers\Management\SliderController;
 
 Route::get('/', [FrontPageController::class, 'index'])->name('frontpage.index');
 Route::get('/allpost', [FrontPageController::class, 'posts'])->name('frontpage.allpost');
@@ -19,10 +20,10 @@ Route::prefix('management')
             Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
             Route::post('/login', [AdminAuthController::class, 'validateUser'])->name('validateuser');
             Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
-            // Route::middleware('authAdmin')->group(function(){
-            //     Route::get('/', [ManagementController::class, 'index'])->name('index');
-            // });
+
             Route::group(['middleware' => ['auth:admin']], function(){
                 Route::get('/', [ManagementController::class, 'index'])->name('index');
+                Route::resource('/slider', SliderController::class);
+                Route::get('/table/slider', [SliderController::class, 'sliderTable'])->name('table.slider');
             });
         });
