@@ -41,12 +41,15 @@ class SliderController extends Controller
 
     public function edit($id)
     {
-        //
+        $slider = Slider::findOrFail($id);
+        return view('management.slider.edit', ['slider' => $slider]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(Slider::$rules);
+        SliderRepository::update($request, $id);
+        return redirect(route('management.slider.index'));
     }
 
     public function destroy($id)

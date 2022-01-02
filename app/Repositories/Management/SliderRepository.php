@@ -8,12 +8,12 @@ use DataTables;
 
 class SliderRepository
 {
-   public function store($req)
+   public function store($request)
    {
        \DB::beginTransaction();
-       $file = FileHelper::upload($req->file('image'));
+       $file = FileHelper::upload($request->file('image'));
        $slider = Slider::create([
-           'title' => $req->input('title'),
+           'title' => $request->input('title'),
            'image' => $file["path"],
            'url' => $file["url"] ?? ''
        ]);
@@ -22,6 +22,21 @@ class SliderRepository
        return $slider ? true : false;
    }
 
+   public function update($request, $id)
+   {
+       $slider = Slider::findOrFail($id);
+       $edit = [
+           'title' => $request->input('title'),
+       ];
+       $new_image = $request->file('image_');
+       if ($new_image) {
+           Self::deleteImage('public/'.$slider->image);
+           $file = FileHelper::upload($new_image);
+           $edit["image"] = $file["path"];
+           $edit["url"] = $file["url"] ?? '';
+       }
+       $slider->update($edit); 
+   }
 
    public function del($id)
    {
@@ -49,11 +64,18 @@ class SliderRepository
                 return $img;
             })
             ->addColumn('action', function ($data) {
-                $action = '<form action={{"'. route('management.slider.destroy', $data->id) .'"}} onclick="return confirm('."'"."Yakin ?"."'".')"  method="POST">
-                            "'.@csrf.'"
-                            <input type="hidden" value="DELETE" name="_method">
-                            <input type="submit" value="Del" class="btn btn-danger">
-                            </form>';
+                $action =  '<div class="row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <a href="'.route('management.slider.edit', $data->id).'" class="btn btn-primary">Edit</a>
+                                </div>
+                                <div class="col-auto">
+                                    <form class="" action="'.route('management.slider.destroy', $data->id).'" onclick="return confirm('."'"."Yakin ?"."'".')"  method="POST">
+                                        '.csrf_field().''.method_field("DELETE").'
+                                        <input type="hidden" value="DELETE" name="_method">
+                                        <input type="submit" value="Del" class="btn btn-danger">
+                                    </form>
+                                </div>
+                            </div>';
                 return $action;
             })
             ->rawColumns(['url', 'action'])
