@@ -13,13 +13,12 @@ class SliderController extends Controller
    
     public function index()
     {
-        $sliders = Slider::latest()->get();
-        return view('management.slider.index', ['sliders' => $sliders]);
+        return view('management.slider.index');
     }
 
     public function sliderTable(Request $request)
     {
-        return SliderRepository::getSliders($request);
+        return SliderRepository::getSlider($request);
     }
 
     public function create()
@@ -31,7 +30,7 @@ class SliderController extends Controller
     {
         $request->validate(Slider::$rules);
         SliderRepository::store($request);
-        return redirect(route('management.slider.create'));
+        return redirect(route('management.slider.create'))->with('success', 'Slider berhasil ditambahkan');
     }
 
     public function show($id)
@@ -55,6 +54,6 @@ class SliderController extends Controller
     public function destroy($id)
     {
         SliderRepository::del($id);
-        return redirect(route('management.slider.index'));
+        return redirect(route('management.slider.index'))->with('warning', 'Slider berhasil dihapus');
     }
 }

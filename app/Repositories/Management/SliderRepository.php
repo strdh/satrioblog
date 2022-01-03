@@ -24,6 +24,7 @@ class SliderRepository
 
    public function update($request, $id)
    {
+       \DB::beginTransaction();
        $slider = Slider::findOrFail($id);
        $edit = [
            'title' => $request->input('title'),
@@ -36,6 +37,7 @@ class SliderRepository
            $edit["url"] = $file["url"] ?? '';
        }
        $slider->update($edit); 
+       \DB::commit();
    }
 
    public function del($id)
@@ -52,7 +54,7 @@ class SliderRepository
        return;
    }
 
-   public function getSliders($request)
+   public function getSlider($request)
    {
        $data = Slider::latest()->get();
        return Datatables::of($data)

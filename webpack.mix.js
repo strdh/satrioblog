@@ -6,6 +6,15 @@ mix.js('resources/js/app.js', 'public/js')
         //
     ]);
 
+mix.styles([
+    /**Custom */
+    'resources/css/ckeditor.css',
+], 'public/css/manage.css').version()
+
 mix.scripts([
     'resources/js/management/slider.js',
+    'resources/js/management/contact.js',
+    'resources/js/management/about.js',
+    'resources/js/management/ckeditor.js',
+    'resources/js/management/textbox.js',
 ], 'public/js/app-management.js').version();

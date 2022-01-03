@@ -9,8 +9,15 @@ class Contact extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
     protected $fillable = [
         'name',
         'value'
     ];
+
+    public static $rules = [
+        'name' => 'required',
+        'value' => 'required'
+    ];
+
 }

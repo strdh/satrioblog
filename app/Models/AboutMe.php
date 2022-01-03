@@ -12,7 +12,13 @@ class AboutMe extends Model
     protected $fillable = [
         'name',
         'short_description',
-        'photo',
+        'image',
         'content'
+    ];
+
+    public static $rules = [
+        'name' => 'required|min:3',
+        'short_description' => 'required|min:20',
+        'content' => 'required|min:50'
     ];
 }

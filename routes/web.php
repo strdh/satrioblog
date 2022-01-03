@@ -5,6 +5,8 @@ use App\Http\Controllers\FrontPage\FrontPageController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Management\ManagementController;
 use App\Http\Controllers\Management\SliderController;
+use App\Http\Controllers\Management\ContactController;
+use App\Http\Controllers\Management\AboutController;
 
 Route::get('/', [FrontPageController::class, 'index'])->name('frontpage.index');
 Route::get('/allpost', [FrontPageController::class, 'posts'])->name('frontpage.allpost');
@@ -20,10 +22,17 @@ Route::prefix('management')
             Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
             Route::post('/login', [AdminAuthController::class, 'validateUser'])->name('validateuser');
             Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
-
+            //middleware admin
             Route::group(['middleware' => ['auth:admin']], function(){
                 Route::get('/', [ManagementController::class, 'index'])->name('index');
+                //slider
                 Route::resource('/slider', SliderController::class);
                 Route::get('/table/slider', [SliderController::class, 'sliderTable'])->name('table.slider');
+                //contact
+                Route::resource('/contact', ContactController::class);
+                Route::get('/table/contact', [ContactController::class, 'contactTable'])->name('table.contact');
+                //about
+                Route::resource('/about', AboutController::class);
+                Route::get('/table/about', [AboutController::class, 'aboutTable'])->name('table.about');
             });
         });
