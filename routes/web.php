@@ -7,6 +7,8 @@ use App\Http\Controllers\Management\ManagementController;
 use App\Http\Controllers\Management\SliderController;
 use App\Http\Controllers\Management\ContactController;
 use App\Http\Controllers\Management\AboutController;
+use App\Http\Controllers\Management\CategoryController;
+use App\Http\Controllers\Management\PostController;
 
 Route::get('/', [FrontPageController::class, 'index'])->name('frontpage.index');
 Route::get('/allpost', [FrontPageController::class, 'posts'])->name('frontpage.allpost');
@@ -34,5 +36,11 @@ Route::prefix('management')
                 //about
                 Route::resource('/about', AboutController::class);
                 Route::get('/table/about', [AboutController::class, 'aboutTable'])->name('table.about');
+                //category
+                Route::resource('/category', CategoryController::class);
+                Route::get('/table/category', [CategoryController::class, 'categoryTable'])->name('table.category');
+                //post
+                Route::resource('/post', PostController::class);
+                Route::get('/table/post', [PostController::class, 'postTable'])->name('table.post');
             });
         });

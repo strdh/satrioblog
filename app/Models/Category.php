@@ -15,6 +15,10 @@ class Category extends Model
         'image'
     ];
 
+    public static $rules = [
+        'name' => 'required|min:3|max:100',
+    ];
+
     public function posts()
     {
         return $this->hasMany(Post::class, 'category_id');

@@ -16,7 +16,7 @@ class AboutController extends Controller
 
     public function aboutTable()
     {
-        return AboutRepository::getAbouts();
+        return AboutRepository::getAbout();
     }
 
     public function create()
@@ -38,19 +38,20 @@ class AboutController extends Controller
 
     public function edit($id)
     {
-        $about = About::findOrFail($id);
-        return view('maangement.about.edit', ['about' => $about]);
+        $about = AboutMe::findOrFail($id);
+        return view('management.about.edit', ['about' => $about]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(AboutMe::$rules);
+        AboutRepository::update($request, $id);
+        return redirect(route('management.about.index'))->with('success', 'About berhasil diupdate');
     }
 
     public function destroy($id)
     {
-        $about = About::findOrFail($id);
-        $about->delete();
+        AboutRepository::del($id);
         return redirect(route('management.about.index'))->with('warning', 'About berhasil dihapus');
     }
 }

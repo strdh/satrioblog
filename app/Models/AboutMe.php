@@ -17,8 +17,8 @@ class AboutMe extends Model
     ];
 
     public static $rules = [
-        'name' => 'required|min:3',
-        'short_description' => 'required|min:20',
+        'name' => 'required|min:3|max:50',
+        'short_description' => 'required|min:20|max:250',
         'content' => 'required|min:50'
     ];
 }

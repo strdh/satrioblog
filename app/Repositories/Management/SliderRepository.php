@@ -17,8 +17,8 @@ class SliderRepository
            'image' => $file["path"],
            'url' => $file["url"] ?? ''
        ]);
+       
        \DB::commit();
-
        return $slider ? true : false;
    }
 
@@ -38,6 +38,7 @@ class SliderRepository
        }
        $slider->update($edit); 
        \DB::commit();
+       return;
    }
 
    public function del($id)

@@ -15,6 +15,8 @@ mix.scripts([
     'resources/js/management/slider.js',
     'resources/js/management/contact.js',
     'resources/js/management/about.js',
+    'resources/js/management/post.js',
+    'resources/js/management/category.js',
     'resources/js/management/ckeditor.js',
     'resources/js/management/textbox.js',
 ], 'public/js/app-management.js').version();

@@ -18,6 +18,12 @@ class Post extends Model
         'content'
     ];
 
+    public static $rules = [
+        'title' => 'required|min:3|max:100',
+        'category_id' => 'required',
+        'content' => 'required'
+    ];
+
     public function categories ()
     {
         return $this->belongsTo(Category::class, 'category_id');

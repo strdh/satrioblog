@@ -19,7 +19,7 @@ class AboutRepository
         return $about ? true : false;
     }
 
-    public function getAbouts()
+    public function getAbout()
     {
         $data = AboutMe::latest()->get();
         return DataTables::of($data)
@@ -52,5 +52,31 @@ class AboutRepository
             })
             ->rawColumns(['image', 'detail', 'action'])
             ->make(true);
+    }
+
+    public function update($request, $id)
+    {
+        $about = AboutMe::FindOrFail($id);
+        $edit = [
+            'name' => $request->input('name'),
+            'short_description' => $request->input('short_description'),
+            'content' => $request->input('content'),
+        ];
+        $new_img = $request->file('image_');
+        if ($new_img) {
+            FileHelper::delete('public/'.$about->image);
+            $file = FileHelper::upload($new_img);
+            $edit["image"] = $file["path"];
+        }
+        $about->update($edit);
+        return;
+    }
+
+    public function del($id)
+    {
+        $about = AboutMe::findOrFail($id);
+        FileHelper::delete('public/'.$about->image);
+        $about->delete();
+        return;
     }
 }
