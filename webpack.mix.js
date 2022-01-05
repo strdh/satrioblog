@@ -7,7 +7,6 @@ mix.js('resources/js/app.js', 'public/js')
     ]);
 
 mix.styles([
-    /**Custom */
     'resources/css/ckeditor.css',
 ], 'public/css/manage.css').version()
 

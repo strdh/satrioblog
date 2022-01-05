@@ -42,5 +42,6 @@ Route::prefix('management')
                 //post
                 Route::resource('/post', PostController::class);
                 Route::get('/table/post', [PostController::class, 'postTable'])->name('table.post');
+                Route::post('/post/upload', [PostController::class, 'uploadEditor'])->name('post.cke');
             });
         });

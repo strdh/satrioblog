@@ -26,6 +26,11 @@ body {
     user-select: none;
 }
 
+.potrait {
+    height: 300px;
+    width: 300px;
+}
+
 .tu {
     max-width: 300px;
     max-height: 300px;
@@ -61,4 +66,15 @@ body {
 .ar-img {
     max-width: fit-content;
     max-height: fit-content;
+}
+
+pre code {
+    display: block;
+    background: #f4f4f2;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    max-width: 100%;
+    min-width: 100px;
+    padding: 0;
 }

@@ -9,7 +9,7 @@ $(function () {
             { data: 'thumbnail', name: 'thumbnail' },
             { data: 'created_at', name: 'created_at' },
             { data: 'updated_at', name: 'updated_at' },
-            { data: 'detail', name: 'detail' },
+            { data: 'liveview', name: 'liveview' },
             {
                 data: 'action',
                 name: 'action',

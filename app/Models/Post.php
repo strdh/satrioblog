@@ -21,6 +21,7 @@ class Post extends Model
     public static $rules = [
         'title' => 'required|min:3|max:100',
         'category_id' => 'required',
+        'thumbnail' => 'required',
         'content' => 'required'
     ];
 

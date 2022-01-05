@@ -27,7 +27,21 @@ class PostRepository
 
     public function update($request, $id)
     {
-
+        $post = Post::FindOrFail($id);
+        $data = [
+            'title' => $request->input('title'),
+            'slug' => Str::slug($request->input('title')),
+            'thumbnail' => $request->input('thumbnail'),
+            'category_id' => $request->input('category_id'),
+            'content' => $request->input('content'),
+        ];
+        if ($request->file('thumbnail_')) {
+            FileHelper::delete('public/'.$data['thumbnail']);
+            $file = FileHelper::upload($request->file('thumbnail_'));
+            $data['thumbnail'] = $file['path'];
+        }
+        $post = $post->update($data);
+        return $post ? true : false;
     }
 
     public function getPost()
@@ -42,8 +56,8 @@ class PostRepository
                 $img = '<img src="'.$url.'" width="70" height="70">';
                 return $img;
             })
-            ->addColumn('detail', function ($data) {
-                $link = '<a href="'.$data->id.'"><i class="far fa-eye"></i></a>';
+            ->addColumn('liveview', function ($data) {
+                $link = '<a href="'.route('frontpage.post', $data->slug).'" target="_blank"><i class="far fa-eye"></i></a>';
                 return $link;
             })
             ->editColumn('created_at', function ($data) {
@@ -67,12 +81,18 @@ class PostRepository
                             </div>';
                 return $action;
             })
-            ->rawColumns(['thumbnail', 'detail', 'action'])
+            ->rawColumns(['thumbnail', 'liveview', 'action'])
             ->make(true);
     }
 
     public function del($id)
     {
-
+        $post = Post::findOrFail($id);
+        if ($post) {
+            FileHelper::delete('public/'.$post->thumbnail);
+            $post = $post->delete();
+            return $post ? true : false;
+        }
+        return false; 
     }
 }

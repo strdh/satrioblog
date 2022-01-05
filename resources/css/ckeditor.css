@@ -338,3 +338,14 @@ body[data-editor='InlineEditor'] .collaboration-demo__row {
     border: 1px solid var(--ck-color-toolbar-border);
     margin-left: -1px;
 }
+
+pre code {
+  display: block;
+  background: #f4f4f2;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  max-width: 100%;
+  min-width: 100px;
+  padding: 0;
+}
