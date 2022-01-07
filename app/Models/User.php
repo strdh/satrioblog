@@ -19,7 +19,7 @@ class User extends Authenticatable
         'email',
         'username',
         'password',
-        'image'
+        'avatar'
     ];
 
     public static $rules = [

@@ -46,5 +46,8 @@ Route::prefix('management')
                 Route::post('/post/upload', [PostController::class, 'uploadEditor'])->name('post.cke');
                 //profile
                 Route::get('/profile', [ProfileController::class, 'index'])->name('user.profile');
+                Route::put('/profile', [ProfileController::class, 'update'])->name('user.update');
+                Route::put('/profile/password/', [ProfileController::class, 'updatePassword'])->name('user.password.update');
+                Route::get('/profile/password/', [ProfileController::class, 'editPassword'])->name('user.password.edit');
             });
         });
