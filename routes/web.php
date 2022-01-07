@@ -9,6 +9,7 @@ use App\Http\Controllers\Management\ContactController;
 use App\Http\Controllers\Management\AboutController;
 use App\Http\Controllers\Management\CategoryController;
 use App\Http\Controllers\Management\PostController;
+use App\Http\Controllers\Management\ProfileController;
 
 Route::get('/', [FrontPageController::class, 'index'])->name('frontpage.index');
 Route::get('/allpost', [FrontPageController::class, 'posts'])->name('frontpage.allpost');
@@ -43,5 +44,7 @@ Route::prefix('management')
                 Route::resource('/post', PostController::class);
                 Route::get('/table/post', [PostController::class, 'postTable'])->name('table.post');
                 Route::post('/post/upload', [PostController::class, 'uploadEditor'])->name('post.cke');
+                //profile
+                Route::get('/profile', [ProfileController::class, 'index'])->name('user.profile');
             });
         });

@@ -81,3 +81,8 @@ Breadcrumbs::for('management.slider.edit', function (BreadcrumbTrail $trail, $po
     $trail->parent('management.slider.index');
     $trail->push('Edit', route('management.slider.edit', $post));
 });
+//profile
+Breadcrumbs::for('management.user.profile', function (BreadcrumbTrail $trail): void {
+    $trail->parent('management.index');
+    $trail->push('Porfile', route('management.user.profile'));
+});

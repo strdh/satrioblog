@@ -16,21 +16,28 @@ mix.styles([
     'resources/css/management/management.css',
     'resources/css/ckeditor.css',
 ], 'public/css/management.css').version()
-
+//mangement lib
 // mix.scripts([
 //     'resources/js/management/bootstrap.js',
 //     'resources/js/management/datatables.min.js',
 //     'resources/js/management/popper.js',
 //     'resources/js/management/management.js',
-// ], 'public/js/app-lib.js').version();
-
+// ], 'public/js/lib-managenent.js').version();
+//management
 mix.scripts([
     'resources/js/management/slider.js',
     'resources/js/management/contact.js',
     'resources/js/management/about.js',
     'resources/js/management/post.js',
     'resources/js/management/category.js',
-    'resources/js/management/ckeditor.js',
+    'resources/js/ckeditor.js',
     'resources/js/management/textbox.js',
 ], 'public/js/app-management.js').version();
-
+//frontpage lib
+// mix.scripts([
+//     'resources/js/management/slider.js',
+// ], 'public/js/lib-frontpage.js').version();
+//frontpage
+mix.scripts([
+    'resources/js/ckeditor.js',
+], 'public/js/app-frontpage.js').version();
