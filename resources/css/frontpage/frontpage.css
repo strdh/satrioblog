@@ -1,0 +1,80 @@
+body {
+    /* background-image: linear-gradient(180deg, #eee, #fff 100px, #fff); */
+    font-family: medium-content-sans-serif-font,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+    background-color:#f8f8fa;
+}
+
+.container {
+    max-width: 960px;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.potrait {
+    height: 300px;
+    width: 300px;
+}
+
+.tu {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.text-dark:hover {
+    color: #ed643b !important;
+}
+
+.jumbo {
+    background-color: #ed643b !important;
+}
+
+.ar-title {
+    font-size: 3.5rem;
+}
+
+.ar-cat {
+    font-size: larger;
+}
+
+.ar{
+    font-size:larger;
+    text-align: justify;
+}
+
+.ar-img {
+    max-width: fit-content;
+    max-height: fit-content;
+}
+
+pre code {
+    display: block;
+    background: #f4f4f2;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    max-width: 100%;
+    min-width: 100px;
+    padding: 0;
+}

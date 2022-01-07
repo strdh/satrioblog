@@ -10,7 +10,6 @@ class SliderRepository
 {
    public function store($request)
    {
-       \DB::beginTransaction();
        $file = FileHelper::upload($request->file('image'));
        $slider = Slider::create([
            'title' => $request->input('title'),
@@ -18,40 +17,31 @@ class SliderRepository
            'url' => $file["url"] ?? ''
        ]);
        
-       \DB::commit();
        return $slider ? true : false;
    }
 
    public function update($request, $id)
    {
-       \DB::beginTransaction();
        $slider = Slider::findOrFail($id);
-       $edit = [
+       $data = [
            'title' => $request->input('title'),
        ];
        $new_image = $request->file('image_');
        if ($new_image) {
-           Self::deleteImage('public/'.$slider->image);
+           FileHelper::delete('public/'.$slider->image);
            $file = FileHelper::upload($new_image);
-           $edit["image"] = $file["path"];
-           $edit["url"] = $file["url"] ?? '';
+           $data["image"] = $file["path"];
+           $data["url"] = $file["url"] ?? '';
        }
-       $slider->update($edit); 
-       \DB::commit();
-       return;
+       $slider = $slider->update($data); 
+       return $slider ? true : false;
    }
 
    public function del($id)
    {
        $slider = Slider::findOrFail($id);
-       Self::deleteImage('public/'.$slider->image);
+       FileHelper::delete('public/'.$slider->image);
        $slider->delete();
-       return;
-   }
-
-   public function deleteImage($url)
-   {
-       FileHelper::delete($url);
        return;
    }
 

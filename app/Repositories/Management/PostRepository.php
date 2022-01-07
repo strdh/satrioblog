@@ -44,6 +44,18 @@ class PostRepository
         return $post ? true : false;
     }
 
+    
+    public function del($id)
+    {
+        $post = Post::findOrFail($id);
+        if ($post) {
+            FileHelper::delete('public/'.$post->thumbnail);
+            $post = $post->delete();
+            return $post ? true : false;
+        }
+        return false; 
+    }
+    
     public function getPost()
     {
         $data = Post::with(['categories'])->latest()->get();
@@ -83,16 +95,5 @@ class PostRepository
             })
             ->rawColumns(['thumbnail', 'liveview', 'action'])
             ->make(true);
-    }
-
-    public function del($id)
-    {
-        $post = Post::findOrFail($id);
-        if ($post) {
-            FileHelper::delete('public/'.$post->thumbnail);
-            $post = $post->delete();
-            return $post ? true : false;
-        }
-        return false; 
     }
 }
