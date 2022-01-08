@@ -11,7 +11,7 @@ body {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
-    background-color:#f8f8fa;
+    background-color:#f8f8fa !important;
 }
 
 .container {
@@ -59,8 +59,12 @@ body {
 }
 
 .ar{
-    font-size:larger;
+    font-size:larger !important;
     text-align: justify;
+}
+
+.ct {
+    background-color:#f8f8fa !important;
 }
 
 .ar-img {
