@@ -84,5 +84,10 @@ Breadcrumbs::for('management.slider.edit', function (BreadcrumbTrail $trail, $po
 //profile
 Breadcrumbs::for('management.user.profile', function (BreadcrumbTrail $trail): void {
     $trail->parent('management.index');
-    $trail->push('Porfile', route('management.user.profile'));
+    $trail->push('Profile', route('management.user.profile'));
+});
+
+Breadcrumbs::for('management.user.password.edit', function (BreadcrumbTrail $trail): void {
+    $trail->parent('management.user.profile');
+    $trail->push('Ganti Password', route('management.user.password.edit'));
 });

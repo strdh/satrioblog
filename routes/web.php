@@ -10,12 +10,16 @@ use App\Http\Controllers\Management\AboutController;
 use App\Http\Controllers\Management\CategoryController;
 use App\Http\Controllers\Management\PostController;
 use App\Http\Controllers\Management\ProfileController;
+use App\Http\Controllers\Management\MessageController;
+use App\Http\Controllers\Management\MainMenuController;
 
 Route::get('/', [FrontPageController::class, 'index'])->name('frontpage.index');
 Route::get('/allpost', [FrontPageController::class, 'posts'])->name('frontpage.allpost');
 Route::get('/post/{post:slug}', [FrontPageController::class, 'post'])->name('frontpage.post');
-Route::get('/allcategories', [FrontPageController::class, 'categories'])->name('frontpage.allcategory');
+Route::get('/allcategory', [FrontPageController::class, 'categories'])->name('frontpage.allcategory');
 Route::get('/post/categories/{categories:slug}', [FrontPageController::class, 'postByCategory'])->name('frontpage.by_category');
+Route::get('/message', [FrontPageController::class, 'message'])->name('frontpage.message');
+Route::post('/message', [FrontPageController::class, 'sendMessage'])->name('frontpage.message.store');
 
 Route::prefix('management')
 		->as('management.')
@@ -49,5 +53,11 @@ Route::prefix('management')
                 Route::put('/profile', [ProfileController::class, 'update'])->name('user.update');
                 Route::put('/profile/password/', [ProfileController::class, 'updatePassword'])->name('user.password.update');
                 Route::get('/profile/password/', [ProfileController::class, 'editPassword'])->name('user.password.edit');
+                //message
+                Route::get('/message', [MessageController::class, 'index'])->name('message');
+                Route::get('/table/message', [MessageController::class, 'messageTable'])->name('table.message');
+                //main menu
+                Route::resource('/mainmenu', MainMenuController::class);
+                Route::get('/table/mainmenu', [MainMenuController::class, 'mainmenuTable'])->name('table.mainmenu');
             });
         });
