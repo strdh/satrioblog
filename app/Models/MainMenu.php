@@ -19,4 +19,9 @@ class MainMenu extends Model
         'order_',
         'status'
     ];
+
+    public static $rules = [
+        'title' => 'required',
+        'category' => 'required',
+    ];
 }

@@ -3,10 +3,47 @@
 namespace App\Repositories\Management;
 use Illuminate\Http\Request;
 use App\Models\MainMenu;
+use Facades\App\Helpers\FileHelper;
 use DataTables;
 
 class MainMenuRepository
 {
+    public function store($request)
+    {
+        $data = $request->all();
+        if ($request->file('file')) {
+            $file = FileHelper::upload($request->file('file'));
+            $data['file'] = $file['path'];
+        }
+        $mainmenu = MainMenu::create($data);
+        return $mainmenu ? true : false;
+    }
+
+    public function update($request, $id)
+    {
+        $mainmenu = MainMenu::FindOrFail($id);
+        $data = $request->all();
+        if ($request->file('file')) {
+            if ($mainmenu->file) {
+                FileHelper::delete('public/'.$mainmenu->file);
+            }
+            $file = FileHelper::upload($request->file('file'));
+            $data['file'] = $file['path'];
+        }
+        $mainmenu = $mainmenu->update($data);
+        return $mainmenu ? true : false;
+    }
+
+    public function del($id)
+    {
+        $mainmenu = MainMenu::FindOrFail($id);
+        if ($mainmenu->file) {
+            FileHelper::delete('public/'.$mainmenu->file);
+        }
+        $mainmenu = $mainmenu->delete();
+        return $mainmenu ? true : false;
+    }
+
     public function getMainMenu()
     {
         $data = MainMenu::latest()->get();

@@ -49,7 +49,10 @@ class PostRepository
     {
         $post = Post::findOrFail($id);
         if ($post) {
-            FileHelper::delete('public/'.$post->thumbnail);
+            if ($post->thumbnail) {
+                // dd("Masuk");
+                FileHelper::delete('public/'.$post->thumbnail);
+            }
             $post = $post->delete();
             return $post ? true : false;
         }
