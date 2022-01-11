@@ -4,7 +4,7 @@
  use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 Breadcrumbs::for('management.index', function (BreadcrumbTrail $trail): void {
-    $trail->push('Management', route('management.index'));
+    $trail->push('Dashboard', route('management.index'));
 });
 
 Breadcrumbs::for('parent', function (BreadcrumbTrail $trail, $name, $route): void {
