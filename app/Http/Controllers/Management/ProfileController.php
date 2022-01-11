@@ -14,7 +14,9 @@ class ProfileController extends Controller
     public function index()
     {
         $profile = User::whereUsername(Auth::user()->username)->first();
-        $profile->avatar = FileHelper::getUrl($profile->avatar);
+        if ($profile->avatar) {
+            $profile->avatar = FileHelper::getUrl($profile->avatar);
+        }
         return view('management.user.profile', ['profile' => $profile]);
     }
 
