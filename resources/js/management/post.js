@@ -7,6 +7,7 @@ $(function () {
             { data: 'title', name: 'title' },
             { data: 'category_id', name: 'category_id' },
             { data: 'thumbnail', name: 'thumbnail' },
+            { data: 'status', name: 'status'},
             { data: 'created_at', name: 'created_at' },
             { data: 'updated_at', name: 'updated_at' },
             { data: 'liveview', name: 'liveview' },

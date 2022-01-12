@@ -10,13 +10,9 @@ class PostRepository
 {
     public function store($request)
     {
-        $data = [
-            'title' => $request->input('title'),
-            'slug' => Str::slug($request->input('title')),
-            'thumbnail' => '',
-            'category_id' => $request->input('category_id'),
-            'content' => $request->input('content'),
-        ];
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['title']);
+        // dd($data);
         if ($request->file('thumbnail')) {
             $file = FileHelper::upload($request->file('thumbnail'));
             $data['thumbnail'] = $file['path'];
@@ -28,13 +24,8 @@ class PostRepository
     public function update($request, $id)
     {
         $post = Post::FindOrFail($id);
-        $data = [
-            'title' => $request->input('title'),
-            'slug' => Str::slug($request->input('title')),
-            'thumbnail' => $request->input('thumbnail'),
-            'category_id' => $request->input('category_id'),
-            'content' => $request->input('content'),
-        ];
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['title']);
         if ($request->file('thumbnail_')) {
             FileHelper::delete('public/'.$data['thumbnail']);
             $file = FileHelper::upload($request->file('thumbnail_'));
@@ -71,6 +62,13 @@ class PostRepository
                 $img = '<img src="'.$url.'" width="70" height="70">';
                 return $img;
             })
+            ->editColumn('status', function ($data) {
+                if ($data->status == 'publish') {
+                    return '<span class="badge bg-primary">'.$data->status.'</span>';
+                } else if ($data->status == 'draft') {
+                    return '<span class="badge bg-stat">'.$data->status.'</span>';
+                }
+            })
             ->addColumn('liveview', function ($data) {
                 $link = '<a href="'.route('frontpage.post', $data->slug).'" target="_blank"><i class="far fa-eye"></i></a>';
                 return $link;
@@ -96,7 +94,7 @@ class PostRepository
                             </div>';
                 return $action;
             })
-            ->rawColumns(['thumbnail', 'liveview', 'action'])
+            ->rawColumns(['thumbnail', 'status', 'liveview', 'action'])
             ->make(true);
     }
 }

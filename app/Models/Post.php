@@ -15,7 +15,8 @@ class Post extends Model
         'slug',
         'thumbnail',
         'category_id',
-        'content'
+        'content',
+        'status'
     ];
 
     public static $rules = [
