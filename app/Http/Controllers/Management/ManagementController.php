@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\MainMenu;
 use App\Models\Contact;
 use App\Models\Slider;
+use App\Models\Message;
 class ManagementController extends Controller
 {
     public function index()
@@ -18,7 +19,8 @@ class ManagementController extends Controller
             "category" => Category::count(),
             "main_menu" => MainMenu::count(),
             "contact" => Contact::count(),
-            "slider" => Slider::count() 
+            "slider" => Slider::count(),
+            "message" => Message::count(),
         ];
         
         return view('management.index', ['rowCount' => $rowCount]);

@@ -25,6 +25,18 @@ class FrontPageController extends Controller
        return view('frontpage.post.category', $categories);
     }
 
+    public function contacts()
+    {
+        $contacts = FrontPageRepository::contacts();
+        return view('frontpage.page.contact', $contacts);
+    }
+
+    public function abouts()
+    {
+        $abouts = FrontPageRepository::abouts();
+        return view('frontpage.page.about', $abouts);
+    }
+
     public function posts()
     {
         $posts = FrontPageRepository::posts();

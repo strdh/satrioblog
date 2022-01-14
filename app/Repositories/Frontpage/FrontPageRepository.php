@@ -5,7 +5,9 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Slider;
+use App\Models\Contact;
 use App\Models\Message;
+use App\Models\AboutMe;
 use App\Helpers\FileHelper;
 
 class FrontPageRepository
@@ -13,7 +15,7 @@ class FrontPageRepository
     public function index()
     {
         $sliders = Slider::latest()->get();
-        $posts = Post::latest()->limit(3)->get();
+        $posts = Post::whereStatus('publish')->latest()->limit(3)->get();
         $categories = Category::latest()->limit(4)->get();
         foreach($posts as $key => $value) {
             $posts[$key]['thumbnail'] = FileHelper::getUrl($value['thumbnail']);
@@ -50,9 +52,36 @@ class FrontPageRepository
         return $data;
     }
 
+    public function contacts()
+    {
+        $contacts = Contact::latest()->get();
+        $jumbotron = "All Contacts";
+        $data = [
+            'contacts' => $contacts,
+            'jumbotron' => $jumbotron
+        ];
+        return $data;
+    }
+
+    public function abouts()
+    {
+        $abouts = AboutMe::latest()->get();
+        foreach($abouts as $key => $value) {
+             if ($value['image']) {
+                 $abouts[$key]['image'] = FileHelper::getUrl($value['image']);
+             }
+        }
+        $jumbotron = "About";
+        $data = [
+            'abouts' => $abouts,
+            'jumbotron' => $jumbotron
+        ];
+        return $data;
+    }
+
     public function posts()
     {
-        $posts = Post::with(['categories'])->latest();
+        $posts = Post::whereStatus('publish')->with(['categories'])->latest();
         $jumbotron = "All post";
         if (request('search')) {
             $posts->where('title', 'like', '%' . request('search') . '%')
@@ -87,7 +116,9 @@ class FrontPageRepository
 
     public function post(Post $post)
     {
-        $post['thumbnail'] = FileHelper::getUrl($post['thumbnail']);
+        if ($post['thumbnail']) {
+            $post['thumbnail'] = FileHelper::getUrl($post['thumbnail']);
+        }
         $data = ['post' => $post];
         return $data;
     }

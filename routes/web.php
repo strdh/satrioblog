@@ -20,6 +20,8 @@ Route::get('/allcategory', [FrontPageController::class, 'categories'])->name('fr
 Route::get('/post/categories/{categories:slug}', [FrontPageController::class, 'postByCategory'])->name('frontpage.by_category');
 Route::get('/message', [FrontPageController::class, 'message'])->name('frontpage.message');
 Route::post('/message', [FrontPageController::class, 'sendMessage'])->name('frontpage.message.store');
+Route::get('/contact', [FrontPageController::class, 'contacts'])->name('frontpage.contact');
+Route::get('/about', [FrontPageController::class, 'abouts'])->name('frontpage.about');
 
 Route::prefix('management')
 		->as('management.')

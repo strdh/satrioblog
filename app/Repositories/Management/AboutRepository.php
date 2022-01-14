@@ -27,12 +27,15 @@ class AboutRepository
                 return date('m/d/Y', strtotime($data->created_at));
             })
             ->editColumn('image', function ($data) {
-                $url = FileHelper::getUrl($data->image);
-                $img = '<img src="'.$url.'" width="70" height="70">';
+                $img = '<img src="'.url('/images/dummy.jpg').'" width="90" height="70">';
+                if ($data->image) {
+                    $url = FileHelper::getUrl($data->image);
+                    $img = '<img src="'.$url.'" width="70" height="70">';
+                }
                 return $img;
             })
             ->addColumn('detail', function ($data) {
-                $link = '<a href="'.$data->id.'"><i class="far fa-eye"></i></a>';
+                $link = '<a href="'.route('frontpage.about').'" target="_blank"><i class="far fa-eye"></i></a>';
                 return $link;
             })
             ->addColumn('action', function ($data) {

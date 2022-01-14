@@ -67,8 +67,11 @@ class CategoryRepository
                 return date('m/d/Y', strtotime($data->created_at));
             })
             ->editColumn('image', function($data) {
-                $url = FileHelper::getUrl($data->image);
-                $img = '<img src="'.$url.'" width="70" height="70">';
+                $img = '<img src="'.url('/images/dummy.jpg').'" width="70" height="70">';
+                if ($data->image) {
+                    $url = FileHelper::getUrl($data->image);
+                    $img = '<img src="'.$url.'" width="70" height="70">';
+                }
                 return $img;
             })
             ->addColumn('action', function($data) {

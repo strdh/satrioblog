@@ -7,6 +7,7 @@ mix.js('resources/js/app.js', 'public/js')
     ]);
 
 mix.styles([
+    'resources/css/frontpage/bootstrap.css',
     'resources/css/frontpage/frontpage.css',
     'resources/css/frontpage/ckeditor.css',
 ], 'public/css/frontpage.css').version()
@@ -41,9 +42,9 @@ mix.scripts([
 ], 'public/js/app-management.js').version();
 
 //frontpage lib
-// mix.scripts([
-//     'resources/js/management/slider.js',
-// ], 'public/js/lib-frontpage.js').version();
+mix.scripts([
+    'resources/js/frontpage/bootstrap.js',
+], 'public/js/lib-frontpage.js').version();
 //frontpage
 
 mix.scripts([
