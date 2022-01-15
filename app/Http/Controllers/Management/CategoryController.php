@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Management\CategoryRequest;
 use App\Models\Category;
 use Facades\App\Repositories\Management\CategoryRepository;
 
@@ -24,9 +25,8 @@ class CategoryController extends Controller
         return view('management.category.create');
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $request->validate(Category::$rules);
         CategoryRepository::store($request);
         return redirect(route('management.category.create'))->with('success', 'Data berhasil disimpan');
     }
@@ -42,9 +42,8 @@ class CategoryController extends Controller
         return view('management.category.edit', ['category' => $category]);
     }
 
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $request->validate(Category::$rules);
         CategoryRepository::update($request, $id);
         return redirect(route('management.category.index'))->with('success', 'Data berhasil diupdate');
     }

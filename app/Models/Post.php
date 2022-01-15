@@ -19,13 +19,6 @@ class Post extends Model
         'status'
     ];
 
-    public static $rules = [
-        'title' => 'required|min:3|max:100',
-        'category_id' => 'required',
-        'thumbnail' => 'required',
-        'content' => 'required'
-    ];
-
     public function categories ()
     {
         return $this->belongsTo(Category::class, 'category_id');

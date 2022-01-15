@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Management\PostRequest;
 use App\Models\Post;
 use App\Models\Category;
 use App\Helpers\FileHelper;
@@ -27,9 +28,8 @@ class PostController extends Controller
         return view('management.post.create', ['categories' => $categories]);
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $request->validate(Post::$rules);
         $post = PostRepository::store($request);
         if ($post) {
             return redirect(route('management.post.create'))->with('success', 'Data berhasil disimpan');
@@ -51,9 +51,8 @@ class PostController extends Controller
         return view('management.post.edit', ['post' => $post, 'categories' => $categories, 'thumbnail' => $thumbnail]);
     }
 
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-        $request->validate(Post::$rules);
         $post = PostRepository::update($request, $id);
         if ($post) {
             return redirect(route('management.post.index'))->with('success', 'Data berhasil diupdate');
@@ -73,16 +72,6 @@ class PostController extends Controller
     }
 
     public function uploadEditor(Request $request){
-        if ($request->hasFile('upload')) {
-            $originName = $request->file('upload')->getClientOriginalName();
-            $fileName = pathinfo($originName, PATHINFO_FILENAME);
-            $extension = $request->file('upload')->getClientOriginalExtension();
-            $fileName = $fileName . '_' . time() . '.' . $extension;
-
-            $request->file('upload')->move(public_path('media'), $fileName);
-
-            $url = asset('media/' . $fileName);
-            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
-        }
+        return PostRepository::uploadEditor($request);
     }
 }
