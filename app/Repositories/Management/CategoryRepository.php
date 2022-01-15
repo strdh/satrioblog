@@ -35,13 +35,15 @@ class CategoryRepository
             'name' => $name,
             'slug' => Str::slug($name),
         ];
-        $new_img = $request->file('image_');
-        // dd($new_img);
+
+        $new_img = $request->file('image');
+        
         if ($new_img) {
             FileHelper::delete('public/'.$category->image);
             $file = FileHelper::upload($new_img);
             $edit["image"] = $file["path"];
         }
+
         $category->update($edit);
         return;
     }

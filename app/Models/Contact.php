@@ -14,10 +14,4 @@ class Contact extends Model
         'name',
         'value'
     ];
-
-    public static $rules = [
-        'name' => 'required',
-        'value' => 'required'
-    ];
-
 }

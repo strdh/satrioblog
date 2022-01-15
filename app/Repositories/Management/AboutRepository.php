@@ -65,7 +65,7 @@ class AboutRepository
             'short_description' => $request->input('short_description'),
             'content' => $request->input('content'),
         ];
-        $new_img = $request->file('image_');
+        $new_img = $request->file('image');
         if ($new_img) {
             FileHelper::delete('public/'.$about->image);
             $file = FileHelper::upload($new_img);

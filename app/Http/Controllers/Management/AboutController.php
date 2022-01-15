@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Management\AboutRequest;
 use App\Models\AboutMe;
 use Facades\App\Repositories\Management\AboutRepository;
 
@@ -24,9 +25,8 @@ class AboutController extends Controller
         return view('management.about.create');
     }
 
-    public function store(Request $request)
+    public function store(AboutRequest $request)
     {
-        $request->validate(AboutMe::$rules);
         AboutRepository::store($request);
         return redirect(route('management.about.index'))->with('success', 'About berhasil ditambahkan');
     }
@@ -42,9 +42,8 @@ class AboutController extends Controller
         return view('management.about.edit', ['about' => $about]);
     }
 
-    public function update(Request $request, $id)
+    public function update(AboutRequest $request, $id)
     {
-        $request->validate(AboutMe::$rules);
         AboutRepository::update($request, $id);
         return redirect(route('management.about.index'))->with('success', 'About berhasil diupdate');
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Management\ContactRequest;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use Facades\App\Repositories\Management\ContactRepository;
@@ -24,9 +25,8 @@ class ContactController extends Controller
         return view('management.contact.create');
     }
 
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        $request->validate(Contact::$rules);
         Contact::create($request->all());
         return redirect(route('management.contact.create'))->with('success', 'Contact berhasil ditambahkan');
     }
@@ -42,9 +42,8 @@ class ContactController extends Controller
         return view('management.contact.edit', ['contact' => $contact]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ContactRequest $request, $id)
     {
-        $request->validate(Contact::$rules);
         $contact = Contact::findOrFail($id);
         $contact->update($request->except('_token'));
         return redirect(route('management.contact.index'))->with('success', 'Contact berhasil diupdate');
