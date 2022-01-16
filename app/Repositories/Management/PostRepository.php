@@ -26,9 +26,9 @@ class PostRepository
         $post = Post::FindOrFail($id);
         $data = $request->all();
         $data['slug'] = Str::slug($data['title']);
-        if ($request->file('thumbnail_')) {
+        if ($request->file('thumbnail')) {
             FileHelper::delete('public/'.$post->thumbnail);
-            $file = FileHelper::upload($request->file('thumbnail_'));
+            $file = FileHelper::upload($request->file('thumbnail'));
             $data['thumbnail'] = $file['path'];
         }
         $post = $post->update($data);

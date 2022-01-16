@@ -16,7 +16,7 @@ class PostRequest extends FormRequest
         return [
             'title' => 'required|min:3|max:100',
             'category_id' => 'required',
-            'thumbnail' => 'required|mimes:jpeg,jpg,png|max:5100',
+            'thumbnail' => ($this->getMethod() == 'POST') ? 'required|mimes:jpeg,jpg,png|max:5100' : 'nullable|mimes:jpeg,jpg,png|max:5100',
             'content' => 'required'
         ];
     }

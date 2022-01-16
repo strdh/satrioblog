@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Management\SliderRequest;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 use Facades\App\Repositories\Management\SliderRepository;
@@ -26,9 +27,8 @@ class SliderController extends Controller
         return view('management.slider.create');
     }
 
-    public function store(Request $request)
+    public function store(SliderRequest $request)
     {
-        $request->validate(Slider::$rules);
         SliderRepository::store($request);
         return redirect(route('management.slider.create'))->with('success', 'Slider berhasil ditambahkan');
     }
@@ -44,11 +44,10 @@ class SliderController extends Controller
         return view('management.slider.edit', ['slider' => $slider]);
     }
 
-    public function update(Request $request, $id)
+    public function update(SliderRequest $request, $id)
     {
-        $request->validate(Slider::$rules);
         SliderRepository::update($request, $id);
-        return redirect(route('management.slider.index'));
+        return redirect(route('management.slider.index'))->with('success', 'Slider berhasil diupdate');
     }
 
     public function destroy($id)

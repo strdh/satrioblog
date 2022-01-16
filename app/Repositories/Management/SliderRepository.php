@@ -26,7 +26,7 @@ class SliderRepository
        $data = [
            'title' => $request->input('title'),
        ];
-       $new_image = $request->file('image_');
+       $new_image = $request->file('image');
        if ($new_image) {
            FileHelper::delete('public/'.$slider->image);
            $file = FileHelper::upload($new_image);
