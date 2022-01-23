@@ -3,8 +3,9 @@
     "/css/app.css": "/css/app.css?id=68b329da9893e34099c7",
     "/css/frontpage.css": "/css/frontpage.css?id=73b4b2a82ce778da04a1",
     "/css/management.css": "/css/management.css?id=b5b36d171621d3b0445c",
-    "/js/lib-management.js": "/js/lib-management.js?id=a7f3e4208174c76c0cf2",
-    "/js/app-management.js": "/js/app-management.js?id=3647c3f7174a37698858",
+    "/css/writer.css": "/css/writer.css?id=b5b36d171621d3b0445c",
     "/js/lib-frontpage.js": "/js/lib-frontpage.js?id=8bca105bee337144172c",
-    "/js/app-frontpage.js": "/js/app-frontpage.js?id=32029e0d38a2a5e82d73"
+    "/js/app-frontpage.js": "/js/app-frontpage.js?id=32029e0d38a2a5e82d73",
+    "/js/lib-management.js": "/js/lib-management.js?id=a7f3e4208174c76c0cf2",
+    "/js/app-management.js": "/js/app-management.js?id=3647c3f7174a37698858"
 }

@@ -16,3 +16,7 @@ Route::get('/about', [FrontPageController::class, 'abouts'])->name('frontpage.ab
 Route::prefix('management')
 		->as('management.')
 		->group(__DIR__.'/management.php');
+
+Route::prefix('writer')
+		->as('writer.')
+		->group(__DIR__.'/writer.php');
