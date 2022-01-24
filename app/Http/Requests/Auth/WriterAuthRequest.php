@@ -24,7 +24,10 @@ class WriterAuthRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => "required|min:3|max:100",
+            "email" => "required|unique:writers",
+            "username" => "required|min:8|max:100",
+            "password" => "required|min:8|max:100",
         ];
     }
 }
