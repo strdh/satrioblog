@@ -13,9 +13,10 @@ Route::post('/message', [FrontPageController::class, 'sendMessage'])->name('fron
 Route::get('/contact', [FrontPageController::class, 'contacts'])->name('frontpage.contact');
 Route::get('/about', [FrontPageController::class, 'abouts'])->name('frontpage.about');
 
+
 Route::prefix('management')
-		->as('management.')
-		->group(__DIR__.'/management.php');
+->as('management.')
+->group(__DIR__.'/management.php');
 
 Route::prefix('writer')
 		->as('writer.')
