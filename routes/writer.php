@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\WriterAuthController;
+use App\Http\Controllers\Writer\WriterController;
 
 Route::get('/register', [WriterAuthController::class, 'register'])->name('register');
 Route::post('/register', [WriterAuthController::class, 'createUser'])->name('createuser');
@@ -10,5 +11,5 @@ Route::post('/login', [WriterAuthController::class, 'validateUser'])->name('vali
 Route::get('/logout', [WriterAuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth:writer']], function() {
-    
+    Route::get('/', [WriterController::class, 'index'])->name('index');
 });
