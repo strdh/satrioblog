@@ -7458,6 +7458,8 @@ textarea.form-control-lg {
   background-color: var(--bs-yellow) !important;
 }
 
+
+
 .user-select-all {
   -webkit-user-select: all !important;
      -moz-user-select: all !important;
