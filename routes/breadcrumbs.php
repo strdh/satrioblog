@@ -3,8 +3,14 @@
  use Diglactic\Breadcrumbs\Breadcrumbs;
  use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
+ //Management
 Breadcrumbs::for('management.index', function (BreadcrumbTrail $trail): void {
     $trail->push('Dashboard', route('management.index'));
+});
+
+//Writer
+Breadcrumbs::for('writer.index', function (BreadcrumbTrail $trail): void {
+    $trail->push('Dashboard Writer', route('writer.index'));
 });
 
 Breadcrumbs::for('parent', function (BreadcrumbTrail $trail, $name, $route): void {
@@ -26,3 +32,4 @@ Breadcrumbs::for('editpassword', function (BreadcrumbTrail $trail, $pName, $pRou
     $trail->parent('parent', $pName, $pRoute);
     $trail->push('EditPassword', route($route));
 });
+

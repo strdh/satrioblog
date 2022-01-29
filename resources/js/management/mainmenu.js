@@ -2,6 +2,7 @@ $(document).ready(function () {
     $('#content-m').hide();
     $('#file-m').hide();
     $('#link-m').hide();
+    
     $('#menu-category').change(function () {
         if ($('#menu-category').val() == "content") {
             $('#content-m').show();
